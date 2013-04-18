@@ -4,6 +4,70 @@
 <h1>Add Contact</h1>
 {% endif %}
 
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+
+  {% for field in form %}
+  <div id="{{ field.auto_id }}_container">
+    {{ field.help_text }}
+    <div>
+      {{ field.label_tag }} {{ field }}
+    </div>
+    <div id="{{ field.auto_id }}_errors">
+      {{ field.errors }}
+    </div>
+  </div>
+  {% endfor %}
+
+  <input type="submit" value="Save" />
+</form>
+
+{% if contact.id %}
+<a href="{% url "contacts-edit" pk=contact.id %}">
+  Edit
+</a>
+<a href="{% url "contacts-delete" pk=contact.id %}">Delete</a>
+{% endif %}
+
+<a href="{% url "contacts-list" %}">back to list</a>
+
+
+
+
+
+<!-- {% if contact.id %}
+<h1>Edit Contact</h1>
+{% else %}
+<h1>Add Contact</h1>
+{% endif %}
+
+{% if contact.id %}
+<a href="{% url "contacts-delete" pk=contact.id %}">Delete</a>
+{% endif %}
+
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+  <ul>
+    {% for field in form %}
+    {{ field }}
+    {% endfor %}
+  </ul>
+  <input type="submit" value="Save" />
+</form>
+
+<a href="{% url "contacts-list" %}">back to list</a>
+ -->
+
+
+
+
+
+<!-- {% if contact.id %}
+<h1>Edit Contact</h1>
+{% else %}
+<h1>Add Contact</h1>
+{% endif %}
+
 {% if contact.id %}
 <a href="{% url "contacts-delete" pk=contact.id %}">Delete</a>
 {% endif %}
@@ -16,7 +80,7 @@
   <input type="submit" value="Save" />
 </form>
 
-<a href="{% url "contacts-list" %}">back to list</a>
+<a href="{% url "contacts-list" %}">back to list</a> -->
 
 
 

@@ -19,6 +19,8 @@ from django.views.generic import DeleteView
 
 from django.views.generic import DetailView
 
+import forms
+
 class ListContactView(ListView):
 
     model = Contact
@@ -46,6 +48,7 @@ class CreateContactView(CreateView):
 
     model = Contact
     template_name = 'edit_contact.html'
+    form_class = forms.ContactForm
 
     def get_success_url(self):
         return reverse('contacts-list')
@@ -61,6 +64,7 @@ class UpdateContactView(UpdateView):
 
     model = Contact
     template_name = 'edit_contact.html'
+    form_class = forms.ContactForm
 
     def get_success_url(self):
         return reverse('contacts-list')
@@ -85,3 +89,13 @@ class ContactView(DetailView):
 
     model = Contact
     template_name = 'contact.html'
+    def clean(self):
+
+        if (self.cleaned_data.get('email') !=
+            self.cleaned_data.get('confirm_email')):
+
+            raise ValidationError(
+                "Email addresses must match."
+            )
+
+        return self.cleaned_data
