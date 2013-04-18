@@ -1,0 +1,55 @@
+{% if contact.id %}
+<h1>Edit Contact</h1>
+{% else %}
+<h1>Add Contact</h1>
+{% endif %}
+
+{% if contact.id %}
+<a href="{% url "contacts-delete" pk=contact.id %}">Delete</a>
+{% endif %}
+
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+  <ul>
+    {{ form.as_ul }}
+  </ul>
+  <input type="submit" value="Save" />
+</form>
+
+<a href="{% url "contacts-list" %}">back to list</a>
+
+
+
+
+
+<!-- {% if contact.id %}
+<h1>Edit Contact</h1>
+{% else %}
+<h1>Add Contact</h1>
+{% endif %}
+
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+  <ul>
+    {{ form.as_ul }}
+  </ul>
+  <input type="submit" value="Save" />
+</form>
+
+<a href="{% url "contacts-list" %}">back to list</a> -->
+
+
+
+
+
+<!-- <h1>Add Contact</h1>
+
+<form action="{% url "contacts-new" %}" method="POST">
+  {% csrf_token %}
+  <ul>
+    {{ form.as_ul }}
+  </ul>
+  <input type="submit" value="Save" />
+</form>
+
+<a href="{% url "contacts-list" %}">back to list</a> -->
