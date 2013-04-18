@@ -21,6 +21,8 @@ from django.views.generic import DetailView
 
 import forms
 
+# from contacts.forms import *
+
 class ListContactView(ListView):
 
     model = Contact
@@ -99,3 +101,14 @@ class ContactView(DetailView):
             )
 
         return self.cleaned_data
+
+class EditContactAddressView(UpdateView):
+
+    model = Contact
+    template_name = 'edit_addresses.html'
+    # form_class = forms.ContactAddressFormSet
+
+    def get_success_url(self):
+
+        # redirect to the Contact view.
+        return self.get_object().get_absolute_url()
