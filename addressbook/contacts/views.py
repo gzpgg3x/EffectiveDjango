@@ -17,6 +17,8 @@ from django.views.generic import UpdateView
 
 from django.views.generic import DeleteView
 
+from django.views.generic import DetailView
+
 class ListContactView(ListView):
 
     model = Contact
@@ -78,3 +80,8 @@ class DeleteContactView(DeleteView):
 
     def get_success_url(self):
         return reverse('contacts-list')
+
+class ContactView(DetailView):
+
+    model = Contact
+    template_name = 'contact.html'
